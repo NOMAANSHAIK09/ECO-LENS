@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoLens — Dark Tech</title>
+
+  <!-- fonts & pdf -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- PARTICLES CANVAS -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="brand">
+        <span class="mark">⦿</span>
+        <span class="title">EcoLens</span>
+      </div>
+      <div class="subtitle"></div>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" id="voiceBtn" title="Voice input (experimental)">🎙</button>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme">🌗</button>
+      <!-- <a href="{{ url_for('signup_page') }}" class="btn nav-link">Sign Up/Login</a> -->
+      {% if username %}
+    <button class="btn nav-link">
+        {{ username }}
+    </button>
+    <a href="/logout" class="nav-link">Logout</a>
+{% else %}
+    
+    <button class="btn">
+        <a href="{{ url_for('signup_page') }}" class="nav-link">Sign Up/login</a>
+    </button>
+{% endif %}
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">EcoLens</h1>
+      <p class="hero-lead">AI-guided product sustainability — usage, disposal, reuse, and mitigation in one click.</p>
+ <!--user input-->
+      <div class="search-row">
+        <div class="typeahead">
+          <input id="productInput" placeholder="Search product (e.g., Plastic Bottle, Battery, T-Shirt)" autocomplete="off" />
+          <ul id="suggestions" class="suggestions"></ul>
+        </div>
+
+        <button id="analyzeBtn" class="primary">ANALYZE</button>
+        <button id="downloadBtn" class="ghost" style="display:none">DOWNLOAD PDF</button>
+      </div>
+
+      <div class="chips">
+        <button class="chip" onclick="quickFill('Plastic Bottle')">Plastic</button>
+        <button class="chip" onclick="quickFill('Battery')">E-waste</button>
+        <button class="chip" onclick="quickFill('T-Shirt')">Textile</button>
+        <button class="chip" onclick="quickFill('Glass Jar')">Glass</button>
+      </div>
+     <div class="cam-wrapper">
+
+      <!--   live camp -->
+  <div class="cam-title">Live Waste Scanner</div>
+
+  <video id="liveCam" autoplay playsinline></video>
+
+  <div id="liveStatus"></div>
+
+  <button id="startScanBtn" class="primary" style="margin-top:12px;">
+    🎥 Start Live Scan
+  </button>
+
+  <button id="stopScanBtn" class="ghost" style="margin-top:12px; display:none;">
+    ✖ Stop Scan
+  </button>
+</div>
+
+</div>
+
+
+    </div>
+  </header>
+
+  <!-- ABOUT / HOW -->
+  <section class="info reveal">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>About</h3>
+        <p>EcoLens tells you how to use, dispose, reuse and reduce harm from everyday products using AI-driven guidance.</p>
+      </div>
+      <div class="info-card">
+        <h3>Why it matters</h3>
+        <p>Small daily decisions (how you use or throw things) add up. EcoLens makes those decisions clear and actionable.</p>
+      </div>
+      <div class="info-card">
+        <h3>How it works</h3>
+        <p>Type a product → model analyzes lifecycle & best practices → we show clean, practical steps you can follow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <main id="reportArea" class="results reveal">
+    <div id="loading" class="loading" aria-hidden="true"><span class="loader"></span>Analyzing…</div>
+
+    <div id="scoreCard" class="score-card" style="display:none;"></div>
+<!--  result -->
+    <div id="resultCards" class="cards"></div>
+  </main>
+
+  <button id="topBtn" class="top-btn" onclick="scrollToTop()">↑</button>
+
+  <footer class="footer">
+    <div>EcoLens • Dark Tech • SDG 12 & SDG 13</div>
+    <div class="refs">References: UN SDG · CPCB · UNEP</div>
+  </footer>
+<!-- Gemini SDK -->
+<!-- <script type="module" src="https://esm.run/@google/generative-ai"></script> -->
+
+<script type="module" src="/static/script.js"></script>
+
+</body>
+</html>
