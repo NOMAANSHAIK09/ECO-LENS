@@ -2,4 +2,5 @@ Flask
 Flask-SQLAlchemy
 python-dotenv
 requests
+psycopg2-binary
 gunicorn
