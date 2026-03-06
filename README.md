@@ -85,7 +85,7 @@ Deployment
 
 Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/EcoLens.git
+git clone https://github.com/NOMAANSHAIK09/EcoLens.git
 cd EcoLens
 
 Install dependencies
